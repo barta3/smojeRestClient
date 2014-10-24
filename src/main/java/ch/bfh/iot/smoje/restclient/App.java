@@ -1,4 +1,4 @@
-package ch.bfh.smoje.clinent;
+package ch.bfh.iot.smoje.restclient;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
