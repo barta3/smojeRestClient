@@ -1,8 +1,5 @@
 package ch.bfh.iot.smoje.coapclient;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-
 import org.eclipse.californium.core.coap.Request;
 import org.eclipse.californium.core.coap.Response;
 import org.eclipse.californium.core.coap.CoAP.Code;
@@ -12,19 +9,16 @@ import org.eclipse.californium.core.network.config.NetworkConfig;
  * Coap Sample
  *
  */
-public class CoapClient {
+public class CoapDiscoveryClient {
 	public static void main(String[] args) throws Exception {
 		NetworkConfig.createStandardWithoutFile();
 		Request req = new Request(Code.GET);
-		req.setURI("coap://192.168.43.255:5683/raspicam");
+		req.setURI("coap://224.00.1.0:5683/.well-known/core");
+		req.setMulticast(true);
 		req.send();
 		Response resp;
 		resp = req.waitForResponse();
 		System.out.println("" + resp.getPayloadString());
-
-		OutputStream stream = new FileOutputStream("/home/heroku/temp/coap.jpg");
-		stream.write(resp.getPayload());
-		stream.close();
 	}
 
 }
